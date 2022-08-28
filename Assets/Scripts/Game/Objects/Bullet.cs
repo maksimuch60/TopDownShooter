@@ -31,7 +31,7 @@ namespace TDS.Game.Objects
         {
             yield return new WaitForSeconds(_lifeTime);
             
-            Destroy(gameObject);
+            Destroy(gameObject );
         }
     }
 }

@@ -5,6 +5,8 @@ namespace TDS.Game.Player
 {
     public class PlayerAttack : MonoBehaviour
     {
+        [SerializeField] private PlayerAnimation _playerAnimation;
+
         [SerializeField] private Transform _spawnPosition;
         
         [SerializeField] private GameObject _bulletPrefab;
@@ -45,6 +47,7 @@ namespace TDS.Game.Player
         {
             Instantiate(_bulletPrefab, _spawnPosition.position, _cachedTransform.rotation);
             _timer = _fireDelay;
+            _playerAnimation.PlayAttack();
         }
     }
 }
