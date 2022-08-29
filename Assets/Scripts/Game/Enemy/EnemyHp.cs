@@ -3,9 +3,9 @@ using TDS.Constants;
 using TDS.Game.Objects;
 using UnityEngine;
 
-namespace TDS.Game.Player
+namespace TDS.Game.Enemy
 {
-    public class PlayerHp : MonoBehaviour
+    public class EnemyHp : MonoBehaviour
     {
         [SerializeField] private int _originalLives;
 
@@ -22,20 +22,20 @@ namespace TDS.Game.Player
 
         private void OnCollisionEnter2D(Collision2D col)
         {
-            if (col.gameObject.CompareTag(Tags.EnemyBullet) && _isAlive)
+            if (col.gameObject.CompareTag(Tags.PlayerBullet) && _isAlive)
             {
                 Bullet bullet = col.collider.GetComponent<Bullet>();
                 ChangeLives(bullet.Damage);
             }
         }
 
-        public void ChangeLives(int lives)
+        private void ChangeLives(int lives)
         {
             _lives += lives;
             if (_lives <= 0)
             {
-                OnLivesEnded?.Invoke();
                 _isAlive = false;
+                OnLivesEnded?.Invoke();
             }
         }
     }

@@ -1,10 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
     public class EnemyAttack : MonoBehaviour
     {
+        [SerializeField] private EnemyAnimation _enemyAnimation;
+        [SerializeField] private EnemyHp _enemyHp;
+
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _bulletSpawnPosition;
         
@@ -16,6 +20,20 @@ namespace TDS.Game.Enemy
         private void Awake()
         {
             _cachedTransform = transform;
+        }
+
+        private void OnEnable()
+        {
+            _enemyHp.OnLivesEnded += StopCoroutine;
+        }
+
+        private void OnDisable()
+        {
+            _enemyHp.OnLivesEnded -= StopCoroutine;
+        }
+
+        private void Start()
+        {
             StartCoroutine(Attack());
         }
 
@@ -25,10 +43,17 @@ namespace TDS.Game.Enemy
             {
                 if (_enemyTrigger.IsTriggered())
                 {
+                    _enemyAnimation.PlayShot();
                     Instantiate(_bulletPrefab, _bulletSpawnPosition.position, _cachedTransform.rotation);
                 }
                 yield return new WaitForSeconds(_fireDelay);
             }
+        }
+
+        private void StopCoroutine()
+        {
+            Debug.Log("Не стрелять");
+            StopAllCoroutines();
         }
     }
 }
