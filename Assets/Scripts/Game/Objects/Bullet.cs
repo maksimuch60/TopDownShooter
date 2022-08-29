@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace TDS.Game.Objects
@@ -8,11 +9,11 @@ namespace TDS.Game.Objects
     {
         [SerializeField] private float _speed;
         [SerializeField] private float _lifeTime;
-        
-        
-        
-        
+        [SerializeField] private int _damage;
+
         private Rigidbody2D _rigidbody;
+
+        public int Damage => _damage;
 
         private void Awake()
         {
@@ -20,6 +21,11 @@ namespace TDS.Game.Objects
 
             SetVelocity();
             StartCoroutine(BulletLifeTime());
+        }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            Destroy(gameObject);
         }
 
         private void SetVelocity()
@@ -30,8 +36,8 @@ namespace TDS.Game.Objects
         private IEnumerator BulletLifeTime()
         {
             yield return new WaitForSeconds(_lifeTime);
-            
-            Destroy(gameObject );
+
+            Destroy(gameObject);
         }
     }
 }
