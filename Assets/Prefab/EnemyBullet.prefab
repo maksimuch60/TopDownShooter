@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1866192046909223987}
   - component: {fileID: 3529087505429770391}
-  - component: {fileID: -3679802997276853481}
   - component: {fileID: -7680191007347882914}
+  - component: {fileID: -877423088141049501}
   m_Layer: 9
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -56,21 +56,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-3679802997276853481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2216447285990707112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c592370082f84b5aa57b37a44689fed3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 20
-  _lifeTime: 3
-  _damage: -5
 --- !u!61 &-7680191007347882914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81,7 +66,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.029626697, y: -0.09875578}
@@ -97,6 +82,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3383363, y: 1.1975116}
   m_EdgeRadius: 0
+--- !u!114 &-877423088141049501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2216447285990707112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1633df6fadd47dfbaf35df85f998d6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 20
+  _lifeTime: 3
+  _damage: 5
 --- !u!1 &8888389402293747805
 GameObject:
   m_ObjectHideFlags: 0

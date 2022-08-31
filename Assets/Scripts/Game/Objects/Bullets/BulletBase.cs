@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-namespace TDS.Game.Objects
+namespace TDS.Game.Objects.Bullets
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Bullet : MonoBehaviour
+    public abstract class BulletBase : MonoBehaviour
     {
+        [Header(nameof(BulletBase))]
         [SerializeField] private float _speed;
         [SerializeField] private float _lifeTime;
         [SerializeField] private int _damage;
 
         private Rigidbody2D _rigidbody;
 
-        public int Damage => _damage;
+        protected int Damage => _damage;
 
         private void Awake()
         {
@@ -23,10 +23,14 @@ namespace TDS.Game.Objects
             StartCoroutine(BulletLifeTime());
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
+        private void OnTriggerEnter2D(Collider2D col)
         {
+            CheckCollision(col);
+            
             Destroy(gameObject);
         }
+
+        protected abstract void CheckCollision(Collider2D col);
 
         private void SetVelocity()
         {

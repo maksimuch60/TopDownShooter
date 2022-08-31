@@ -7,36 +7,21 @@ namespace TDS.Game.Enemy
 {
     public class EnemyHp : MonoBehaviour
     {
-        [SerializeField] private int _originalLives;
+        [SerializeField] private int _originalHp;
 
-        private int _lives;
-        private bool _isAlive;
+        private int _hp;
 
-        public event Action OnLivesEnded;
+        public event Action<int> OnHpChanged;
 
         private void Awake()
         {
-            _lives = _originalLives;
-            _isAlive = true;
+            _hp = _originalHp;
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
+        public void RemoveHp(int lives)
         {
-            if (col.gameObject.CompareTag(Tags.PlayerBullet) && _isAlive)
-            {
-                Bullet bullet = col.collider.GetComponent<Bullet>();
-                ChangeLives(bullet.Damage);
-            }
-        }
-
-        private void ChangeLives(int lives)
-        {
-            _lives += lives;
-            if (_lives <= 0)
-            {
-                _isAlive = false;
-                OnLivesEnded?.Invoke();
-            }
+            _hp -= lives;
+            OnHpChanged?.Invoke(_hp);
         }
     }
 }

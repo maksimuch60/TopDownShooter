@@ -27,6 +27,7 @@ namespace TDS.Game.Enemy
         private void RotateToTarget()
         {
             Vector2 direction = _targetTransform.position - _cachedTransform.position;
+            
             _cachedTransform.up = direction;
         }
     }

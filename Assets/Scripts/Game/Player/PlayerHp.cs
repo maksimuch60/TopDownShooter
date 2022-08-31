@@ -1,42 +1,31 @@
 ﻿using System;
-using TDS.Constants;
-using TDS.Game.Objects;
 using UnityEngine;
 
 namespace TDS.Game.Player
 {
     public class PlayerHp : MonoBehaviour
     {
-        [SerializeField] private int _originalLives;
+        [SerializeField] private int _originalHp;
 
-        private int _lives;
-        private bool _isAlive;
+        private int _hp;
 
-        public event Action OnLivesEnded;
+        public event Action<int> OnHpChanged;
 
         private void Awake()
         {
-            _lives = _originalLives;
-            _isAlive = true;
+            _hp = _originalHp;
         }
 
-        private void OnCollisionEnter2D(Collision2D col)
+        public void AddHp(int hp)
         {
-            if (col.gameObject.CompareTag(Tags.EnemyBullet) && _isAlive)
-            {
-                Bullet bullet = col.collider.GetComponent<Bullet>();
-                ChangeLives(bullet.Damage);
-            }
+            _hp += hp;
+            OnHpChanged?.Invoke(_hp);
         }
 
-        public void ChangeLives(int lives)
+        public void RemoveHp(int hp)
         {
-            _lives += lives;
-            if (_lives <= 0)
-            {
-                OnLivesEnded?.Invoke();
-                _isAlive = false;
-            }
+            _hp -= hp;
+            OnHpChanged?.Invoke(_hp);
         }
     }
 }

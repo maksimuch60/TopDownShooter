@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
@@ -9,18 +10,29 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private Collider2D _collider;
 
+        public event Action OnDead;
+
         private void OnEnable()
         {
-            _enemyHp.OnLivesEnded += PerformDeath;
+            _enemyHp.OnHpChanged += CheckDeath;
         }
 
         private void OnDisable()
         {
-            _enemyHp.OnLivesEnded -= PerformDeath;
+            _enemyHp.OnHpChanged -= CheckDeath;
         }
 
-        private void PerformDeath()
+        private void CheckDeath(int hp)
         {
+            if (hp > 0)
+            {
+                return;
+            }
+
+            _enemyHp.OnHpChanged -= CheckDeath;
+            
+            OnDead?.Invoke();
+
             _enemyAnimation.PlayDeath();
             _collider.enabled = false;
             _enemyMovement.enabled = false;

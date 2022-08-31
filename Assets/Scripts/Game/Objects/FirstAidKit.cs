@@ -12,10 +12,15 @@ namespace TDS.Game.Objects
         {
             if (col.collider.CompareTag(Tags.Player))
             {
-                PlayerHp playerHp = col.collider.GetComponent<PlayerHp>();
-                playerHp.ChangeLives(_hpRestoreValue);
-                Destroy(gameObject);
+                ApplyEffect(col);
             }
+        }
+
+        private void ApplyEffect(Collision2D col)
+        {
+            PlayerHp playerHp = col.collider.GetComponent<PlayerHp>();
+            playerHp.AddHp(_hpRestoreValue);
+            Destroy(gameObject);
         }
     }
 }

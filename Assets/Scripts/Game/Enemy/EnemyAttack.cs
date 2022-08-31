@@ -7,7 +7,7 @@ namespace TDS.Game.Enemy
     public class EnemyAttack : MonoBehaviour
     {
         [SerializeField] private EnemyAnimation _enemyAnimation;
-        [SerializeField] private EnemyHp _enemyHp;
+        [SerializeField] private EnemyDeath _enemyDeath;
 
         [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Transform _bulletSpawnPosition;
@@ -16,25 +16,27 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyTrigger _enemyTrigger;
 
         private Transform _cachedTransform;
+        IEnumerator _attackRoutine;
 
         private void Awake()
         {
             _cachedTransform = transform;
+            _attackRoutine = Attack();
         }
 
         private void OnEnable()
         {
-            _enemyHp.OnLivesEnded += StopCoroutine;
+            _enemyDeath.OnDead += StopCoroutine;
         }
 
         private void OnDisable()
         {
-            _enemyHp.OnLivesEnded -= StopCoroutine;
+            _enemyDeath.OnDead -= StopCoroutine;
         }
 
         private void Start()
         {
-            StartCoroutine(Attack());
+            StartCoroutine(_attackRoutine);
         }
 
         private IEnumerator Attack()
@@ -52,8 +54,7 @@ namespace TDS.Game.Enemy
 
         private void StopCoroutine()
         {
-            Debug.Log("Не стрелять");
-            StopAllCoroutines();
+            StopCoroutine(_attackRoutine);
         }
     }
 }
