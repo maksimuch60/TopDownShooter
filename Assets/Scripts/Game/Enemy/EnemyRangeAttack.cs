@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
-    public class EnemyAttack : MonoBehaviour
+    public class EnemyRangeAttack : MonoBehaviour
     {
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private EnemyDeath _enemyDeath;

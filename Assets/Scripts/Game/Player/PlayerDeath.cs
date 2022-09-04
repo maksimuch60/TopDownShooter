@@ -10,9 +10,7 @@ namespace TDS.Game.Player
         [SerializeField] private PlayerAttack _playerAttack;
         [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerAnimation _playerAnimation;
-
-        public bool IsDead { get; private set; }
-
+        
         private void OnEnable()
         {
             _playerHp.OnHpChanged += CheckDeath;
