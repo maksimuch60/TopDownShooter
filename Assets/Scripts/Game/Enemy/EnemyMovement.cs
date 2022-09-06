@@ -6,8 +6,7 @@ namespace TDS.Game.Enemy
     [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyMovement : MonoBehaviour
     {
-        [SerializeField] private float speed;
-        [SerializeField] private EnemyTrigger _enemyTrigger;
+        [SerializeField] private float _speed;
 
         private Rigidbody2D _rigidbody;
         private Transform _target;
@@ -50,15 +49,15 @@ namespace TDS.Game.Enemy
             _rigidbody.velocity = velocity;
         }
 
-        private void MoveToTarget()
-        {
-            Vector3 direction = (_target.position - _cachedTransform.position).normalized;
-            SetVelocity(direction * speed);
-        }
-
         private bool IsTargetValid()
         {
             return _target != null;
+        }
+
+        private void MoveToTarget()
+        {
+            Vector3 direction = (_target.position - _cachedTransform.position).normalized;
+            SetVelocity(direction * _speed);
         }
 
         private void RotateToTarget()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TDS.Game.Objects.Bullets
 {
-    class EnemyBulletBase : BulletBase
+    class EnemyBullet : BulletBase
     {
         protected override void CheckCollision(Collider2D col)
         {
