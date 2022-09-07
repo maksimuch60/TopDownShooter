@@ -5,8 +5,6 @@ namespace TDS.Game.Enemy
 {
     public class TriggerObserver : MonoBehaviour
     {
-        [SerializeField] private CircleCollider2D _circleCollider2D;
-        
         public event Action<Collider2D> OnTriggerEnter;
         public event Action<Collider2D> OnTriggerExit;
 
@@ -18,12 +16,6 @@ namespace TDS.Game.Enemy
         private void OnTriggerExit2D(Collider2D other)
         { 
             OnTriggerExit?.Invoke(other);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawWireSphere(transform.position, _circleCollider2D.radius);
         }
     }
 }
