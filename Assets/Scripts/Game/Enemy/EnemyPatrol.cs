@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using TDS.Game.Objects.Patrol;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
@@ -7,36 +8,35 @@ namespace TDS.Game.Enemy
     public class EnemyPatrol : MonoBehaviour
     {
         [SerializeField] private EnemyMovement _enemyMovement;
-        
-        [SerializeField] private Vector3 _startPoint;
-        [SerializeField] private Vector3 _endPoint;
+        [SerializeField] private PatrolPath _patrolPath;
 
-        private void Start()
+        private GameObject _patrolPointGo;
+        private PatrolPoint _patrolPoint;
+        private void Awake()
         {
-            StartCoroutine(PerformPatrol());
+            _patrolPointGo = new GameObject();
+            _patrolPoint = new PatrolPoint();
+            SetTarget(_patrolPath.NextPoint().PointPosition);
         }
 
-        public IEnumerator PerformPatrol()
+        private void Update()
         {
-            while (true)
+            if (Vector3.Distance(transform.position, _patrolPoint.PointPosition) <= 0.1f)
             {
-                SetTarget(_startPoint);
-                yield return new WaitUntil(() => transform.position == _startPoint);
-                SetTarget(_endPoint);
-                yield return new WaitUntil(() => transform.position == _endPoint);
+                SetTarget(_patrolPath.NextPoint().PointPosition);
             }
         }
 
-        public void StopPatrol()
+        private void OnDrawGizmosSelected()
         {
-            StopAllCoroutines();
+            _patrolPath.OnDrawGizmosSelected();
         }
-            
+
         private void SetTarget(Vector3 targetPosition)
         {
-            GameObject startPoint = new();
-            startPoint.transform.position = targetPosition;
-            _enemyMovement.SetTarget(startPoint.transform);
+            _patrolPoint.SetPosition(targetPosition);
+            _patrolPointGo.transform.position = targetPosition;
+            _enemyMovement.SetTarget(_patrolPointGo.transform);
         }
     }
 }

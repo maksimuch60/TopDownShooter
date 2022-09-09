@@ -334,8 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 7820694653080254417}
   _triggerObserver: {fileID: 7820694651664588113}
-  _startTransform: {fileID: 0}
-  _allowance: 0.1
+  _delta: 0.1
 --- !u!1 &7820694653150562992
 GameObject:
   m_ObjectHideFlags: 0

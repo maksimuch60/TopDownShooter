@@ -8,38 +8,62 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyMovement _enemyMovement;
         [SerializeField] private TriggerObserver _triggerObserver;
         
-        [SerializeField] private float _allowance = 0.1f;
+        [SerializeField] private float _delta = 0.1f;
 
+        private Transform _cachedTransform;
         private GameObject _startPoint;
+        private bool _isOutOfTrigger;
 
         private void Awake()
         {
+            _cachedTransform = transform;
             _startPoint = new GameObject();
+            _startPoint.transform.position = _cachedTransform.position;
         }
 
         private void Start()
         {
+            _triggerObserver.OnTriggerEnter += OnEntered;
             _triggerObserver.OnTriggerExit += OnExited;
         }
 
         private void Update()
         {
-            //TODO: Checking achievment of start point
+            if (!_isOutOfTrigger)
+            {
+                return;
+            }
+
+            if (CheckPosition())
+            {
+                SetTarget(null);
+            }
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             Destroy(_startPoint);
         }
 
-        private void OnExited(Collider2D obj)
+        private bool CheckPosition()
         {
-            SetTarget(_startPoint.transform);
+            return Vector2.Distance(_cachedTransform.position, _startPoint.transform.position) < _delta;
         }
 
         private void SetTarget(Transform target)
         {
             _enemyMovement.SetTarget(target);
+        }
+
+        private void OnEntered(Collider2D obj)
+        {
+            _isOutOfTrigger = false;
+        }
+
+        private void OnExited(Collider2D obj)
+        {
+            _isOutOfTrigger = true;
+            SetTarget(_startPoint.transform);
         }
     }
 }

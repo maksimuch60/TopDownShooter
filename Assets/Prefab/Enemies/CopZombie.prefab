@@ -93,7 +93,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7238172961817913249}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.61, y: 4.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -242,8 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 7238172961817913273}
   _triggerObserver: {fileID: 7238172963150713280}
-  _startTransform: {fileID: 0}
-  _allowance: 0.1
+  _delta: 0.1
 --- !u!1 &7238172962701914087
 GameObject:
   m_ObjectHideFlags: 0
