@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using TDS.Game.Objects.Patrol;
+﻿using TDS.Game.Objects.Patrol;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
@@ -10,33 +8,25 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyMovement _enemyMovement;
         [SerializeField] private PatrolPath _patrolPath;
 
-        private GameObject _patrolPointGo;
-        private PatrolPoint _patrolPoint;
+        private Vector3 _currentPosition;
+
         private void Awake()
         {
-            _patrolPointGo = new GameObject();
-            _patrolPoint = new PatrolPoint();
-            SetTarget(_patrolPath.NextPoint().PointPosition);
+            SetTarget(_patrolPath.NextPoint().transform);
         }
 
         private void Update()
         {
-            if (Vector3.Distance(transform.position, _patrolPoint.PointPosition) <= 0.1f)
+            if (Vector3.Distance(transform.position, _currentPosition) <= 0.1f)
             {
-                SetTarget(_patrolPath.NextPoint().PointPosition);
+                SetTarget(_patrolPath.NextPoint().transform);
             }
         }
 
-        private void OnDrawGizmosSelected()
+        private void SetTarget(Transform patrolPoint)
         {
-            _patrolPath.OnDrawGizmosSelected();
-        }
-
-        private void SetTarget(Vector3 targetPosition)
-        {
-            _patrolPoint.SetPosition(targetPosition);
-            _patrolPointGo.transform.position = targetPosition;
-            _enemyMovement.SetTarget(_patrolPointGo.transform);
+            _currentPosition = patrolPoint.position;
+            _enemyMovement.SetTarget(patrolPoint);
         }
     }
 }
