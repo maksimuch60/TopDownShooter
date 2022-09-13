@@ -1,25 +1,29 @@
 ﻿using System;
+using TDS.Game.Enemy.Movement;
 using TDS.Game.Player;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
-    public class EnemyMoveToPlayer : MonoBehaviour
+    public class EnemyMoveToPlayer : EnemyFollow
     {
         [SerializeField] private EnemyMovement _enemyMovement;
-        [SerializeField] private TriggerObserver _triggerObserver;
 
         private Transform _playerTransform;
 
         private void Start()
         {
-            _triggerObserver.OnTriggerEnter += OnEntered;
             _playerTransform = FindObjectOfType<PlayerHp>().transform;
         }
 
-        private void OnEntered(Collider2D col)
+        private void OnEnable()
         {
             SetTarget(_playerTransform);
+        }
+
+        private void OnDisable()
+        {
+            SetTarget(null);
         }
 
         private void SetTarget(Transform target)

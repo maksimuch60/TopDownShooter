@@ -162,7 +162,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7820694653080254426}
-  - component: {fileID: 7820694653080254419}
   - component: {fileID: 7820694653080254418}
   - component: {fileID: 7820694653080254417}
   - component: {fileID: 7820694653080254416}
@@ -171,6 +170,9 @@ GameObject:
   - component: {fileID: 7820694653080254421}
   - component: {fileID: 7820694653080254420}
   - component: {fileID: 7820694653080254427}
+  - component: {fileID: 4900287580444818389}
+  - component: {fileID: 8630098448681910769}
+  - component: {fileID: 220393311063740622}
   m_Layer: 8
   m_Name: ZombieBossGreen
   m_TagString: Enemy
@@ -197,18 +199,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7820694653080254419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7820694653080254425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea65fcf5980424aad86f01809dcfbc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7820694653080254418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,7 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyHp: {fileID: 7820694653150562989}
-  _enemyMovement: {fileID: 7820694653080254417}
+  enemyDirectMovement: {fileID: 7820694653080254417}
   _enemyAnimation: {fileID: 7820694653080254416}
   _collider: {fileID: 7820694653150562994}
 --- !u!50 &7820694653080254422
@@ -318,8 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 7820694651841553428}
-  _enemyMeleeAttack: {fileID: 7820694653080254421}
-  _enemyMovement: {fileID: 7820694653080254417}
+  _enemyAttack: {fileID: 7820694653080254421}
+  _enemyFollow: {fileID: 7820694653080254418}
 --- !u!114 &7820694653080254427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,9 +322,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175225139aad48158577d94f619a81aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMovement: {fileID: 7820694653080254417}
+  enemyDirectMovement: {fileID: 7820694653080254417}
   _triggerObserver: {fileID: 7820694651664588113}
   _delta: 0.1
+--- !u!114 &4900287580444818389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820694653080254425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338058630ad24d8b8f966e7d8d3d9dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyFollow: {fileID: 7820694653080254418}
+  _enemyBackToIdle: {fileID: 8630098448681910769}
+  _triggerObserver: {fileID: 7820694651664588113}
+--- !u!114 &8630098448681910769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820694653080254425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90b8673aa254c5c9eb291d42a137f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyIdle: {fileID: 220393311063740622}
+--- !u!114 &220393311063740622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820694653080254425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e78992da5c74272a336b60c77a8ae92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7820694653150562992
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,12 +1,14 @@
 ﻿using System;
+using TDS.Game.Enemy.Animation;
+using TDS.Game.Enemy.Movement;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
-    public class EnemyDeath : MonoBehaviour
+    public class EnemyDeath : EnemyBehaviour
     {
         [SerializeField] private EnemyHp _enemyHp;
-        [SerializeField] private EnemyMovement _enemyMovement;
+        [SerializeField] private EnemyDirectMovement enemyDirectMovement;
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private Collider2D _collider;
 
@@ -35,7 +37,7 @@ namespace TDS.Game.Enemy
 
             _enemyAnimation.PlayDeath();
             _collider.enabled = false;
-            _enemyMovement.enabled = false;
+            enemyDirectMovement.enabled = false;
         }
     }
 }

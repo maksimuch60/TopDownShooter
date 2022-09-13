@@ -10,6 +10,11 @@ namespace TDS.Editor.Gizmos
         [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
         static void DrawPatrolGizmo(PatrolPath patrolPath, GizmoType gizmoType)
         {
+            if (Selection.activeGameObject == null)
+            {
+                return;
+            }
+            
             if (Selection.activeGameObject != patrolPath.transform.gameObject &&
                 Selection.activeGameObject.gameObject.GetComponentInParent<PatrolPath>() == null)
             {

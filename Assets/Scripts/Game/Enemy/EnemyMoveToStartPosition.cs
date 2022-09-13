@@ -1,11 +1,12 @@
 ﻿using System;
+using TDS.Game.Enemy.Movement;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
 {
-    public class EnemyMoveToStartPosition : MonoBehaviour
+    public class EnemyMoveToStartPosition : EnemyBehaviour
     {
-        [SerializeField] private EnemyMovement _enemyMovement;
+        [SerializeField] private EnemyDirectMovement enemyDirectMovement;
         [SerializeField] private TriggerObserver _triggerObserver;
         
         [SerializeField] private float _delta = 0.1f;
@@ -52,7 +53,7 @@ namespace TDS.Game.Enemy
 
         private void SetTarget(Transform target)
         {
-            _enemyMovement.SetTarget(target);
+            enemyDirectMovement.SetTarget(target);
         }
 
         private void OnEntered(Collider2D obj)

@@ -1,4 +1,6 @@
 ﻿using System;
+using TDS.Game.Enemy.Attack;
+using TDS.Game.Enemy.Movement;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
@@ -6,8 +8,8 @@ namespace TDS.Game.Enemy
     public class EnemyAgroAttack : MonoBehaviour
     {
         [SerializeField] private TriggerObserver _triggerObserver;
-        [SerializeField] private EnemyMeleeAttack _enemyMeleeAttack;
-        [SerializeField] private EnemyMovement _enemyMovement;
+        [SerializeField] private EnemyAttack _enemyAttack;
+        [SerializeField] private EnemyFollow _enemyFollow;
         
         
         private bool _isInRange;
@@ -22,20 +24,20 @@ namespace TDS.Game.Enemy
         {
             if (_isInRange)
             {
-                _enemyMeleeAttack.Attack();
+                _enemyAttack.Attack();
             }
         }
 
         private void OnEntered(Collider2D col)
         {
             _isInRange = true;
-            _enemyMovement.enabled = false;
+            _enemyFollow.enabled = false;
         }
 
         private void OnExited(Collider2D col)
         {
             _isInRange = false;
-            _enemyMovement.enabled = true;
+            _enemyFollow.enabled = true;
         }
     }
 }

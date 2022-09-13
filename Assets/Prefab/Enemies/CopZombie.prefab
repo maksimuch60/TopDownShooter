@@ -70,7 +70,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7238172961817913248}
-  - component: {fileID: 7238172961817913271}
   - component: {fileID: 7238172961817913272}
   - component: {fileID: 7238172961817913273}
   - component: {fileID: 7238172961817913274}
@@ -80,6 +79,8 @@ GameObject:
   - component: {fileID: 7238172961817913278}
   - component: {fileID: 7238172961817913279}
   - component: {fileID: 222710354}
+  - component: {fileID: 2609230141347937906}
+  - component: {fileID: 2611308195684989195}
   m_Layer: 8
   m_Name: CopZombie
   m_TagString: Enemy
@@ -106,18 +107,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7238172961817913271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7238172961817913249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ea65fcf5980424aad86f01809dcfbc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7238172961817913272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 7238172961817913273}
-  _triggerObserver: {fileID: 7238172963150713280}
 --- !u!114 &7238172961817913273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyHp: {fileID: 7238172963261086021}
-  _enemyMovement: {fileID: 7238172961817913273}
+  enemyDirectMovement: {fileID: 7238172961817913273}
   _enemyAnimation: {fileID: 7238172961817913274}
   _collider: {fileID: 7238172963261086024}
 --- !u!50 &7238172961817913276
@@ -227,8 +215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _triggerObserver: {fileID: 7238172961756939805}
-  _enemyMeleeAttack: {fileID: 7238172961817913277}
-  _enemyMovement: {fileID: 7238172961817913273}
+  _enemyAttack: {fileID: 7238172961817913277}
+  _enemyFollow: {fileID: 7238172961817913272}
 --- !u!114 &7238172961817913279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 175225139aad48158577d94f619a81aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMovement: {fileID: 7238172961817913273}
+  enemyDirectMovement: {fileID: 7238172961817913273}
   _triggerObserver: {fileID: 7238172963150713280}
   _delta: 0.1
 --- !u!114 &222710354
@@ -258,6 +246,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 7238172961817913273}
   _patrolPath: {fileID: 0}
+--- !u!114 &2609230141347937906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7238172961817913249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e90b8673aa254c5c9eb291d42a137f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyIdle: {fileID: 222710354}
+--- !u!114 &2611308195684989195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7238172961817913249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338058630ad24d8b8f966e7d8d3d9dcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyFollow: {fileID: 7238172961817913272}
+  _enemyBackToIdle: {fileID: 2609230141347937906}
+  _triggerObserver: {fileID: 7238172963150713280}
 --- !u!1 &7238172962701914087
 GameObject:
   m_ObjectHideFlags: 0
