@@ -10,13 +10,21 @@ namespace TDS.Game.Enemy
         {
             if (_isActive)
             {
-                OnUpdate();
+                OnActiveUpdate();
             }
         }
 
-        public virtual void Activate(){}
-        public virtual void Deactivate(){}
+        public virtual void Activate()
+        {
+            _isActive = true;
+        }
 
+        public virtual void Deactivate()
+        {
+            _isActive = false;
+        }
+
+        protected virtual void OnActiveUpdate(){}
         protected virtual void OnUpdate(){}
 
     }

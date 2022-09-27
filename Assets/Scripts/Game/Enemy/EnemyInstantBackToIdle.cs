@@ -1,5 +1,4 @@
 ﻿using System;
-using TDS.Game.Enemy.Idle;
 using UnityEngine;
 
 namespace TDS.Game.Enemy

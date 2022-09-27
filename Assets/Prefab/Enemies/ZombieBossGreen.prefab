@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 4900287580444818389}
   - component: {fileID: 8630098448681910769}
   - component: {fileID: 220393311063740622}
+  - component: {fileID: 7768855524993930546}
   m_Layer: 8
   m_Name: ZombieBossGreen
   m_TagString: Enemy
@@ -212,7 +213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMovement: {fileID: 7820694653080254417}
-  _triggerObserver: {fileID: 7820694651664588113}
 --- !u!114 &7820694653080254417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +365,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e78992da5c74272a336b60c77a8ae92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7768855524993930546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7820694653080254425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20041208342f4e30a00cf0c1fbae9706, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyIdle: {fileID: 220393311063740622}
 --- !u!1 &7820694653150562992
 GameObject:
   m_ObjectHideFlags: 0

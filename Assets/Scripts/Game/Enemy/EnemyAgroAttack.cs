@@ -1,5 +1,4 @@
 ﻿using System;
-using TDS.Game.Enemy.Attack;
 using TDS.Game.Enemy.Movement;
 using UnityEngine;
 
@@ -20,24 +19,16 @@ namespace TDS.Game.Enemy
             _triggerObserver.OnTriggerExit += OnExited;
         }
 
-        private void Update()
-        {
-            if (_isInRange)
-            {
-                _enemyAttack.Attack();
-            }
-        }
-
         private void OnEntered(Collider2D col)
         {
-            _isInRange = true;
-            _enemyFollow.enabled = false;
+            _enemyAttack.Activate();
+            _enemyFollow.Deactivate();
         }
 
         private void OnExited(Collider2D col)
         {
-            _isInRange = false;
-            _enemyFollow.enabled = true;
+            _enemyAttack.Deactivate();
+            _enemyFollow.Activate();
         }
     }
 }

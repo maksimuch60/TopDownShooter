@@ -1,7 +1,7 @@
 ﻿using TDS.Game.Player;
 using UnityEngine;
 
-namespace TDS.Game.Enemy.Attack
+namespace TDS.Game.Enemy
 {
     public class EnemyMeleeAttack : EnemyAttack
     {
@@ -19,7 +19,14 @@ namespace TDS.Game.Enemy.Attack
             TickTimer();
         }
 
-        public override void Attack()
+        protected override void OnActiveUpdate()
+        {
+            base.OnActiveUpdate();
+            
+            Attack();
+        }
+
+        private void Attack()
         {
             if (CanAttack())
             {

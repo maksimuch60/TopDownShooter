@@ -1,5 +1,4 @@
-﻿using System;
-using TDS.Game.Enemy.Movement;
+﻿using TDS.Game.Enemy.Movement;
 using TDS.Game.Player;
 using UnityEngine;
 
@@ -16,13 +15,17 @@ namespace TDS.Game.Enemy
             _playerTransform = FindObjectOfType<PlayerHp>().transform;
         }
 
-        private void OnEnable()
+        public override void Activate()
         {
+            base.Activate();
+
             SetTarget(_playerTransform);
         }
 
-        private void OnDisable()
+        public override void Deactivate()
         {
+            base.Deactivate();
+
             SetTarget(null);
         }
 

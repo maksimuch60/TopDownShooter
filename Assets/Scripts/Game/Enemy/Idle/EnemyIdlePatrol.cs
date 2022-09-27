@@ -1,9 +1,8 @@
-﻿using System;
-using TDS.Game.Enemy.Movement;
+﻿using TDS.Game.Enemy.Movement;
 using TDS.Game.Objects.Patrol;
 using UnityEngine;
 
-namespace TDS.Game.Enemy.Idle
+namespace TDS.Game.Enemy
 {
     public class EnemyIdlePatrol : EnemyIdle
     {

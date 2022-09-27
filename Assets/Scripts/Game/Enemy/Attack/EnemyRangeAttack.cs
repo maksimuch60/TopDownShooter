@@ -1,7 +1,6 @@
-﻿using TDS.Game.Enemy.Animation;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace TDS.Game.Enemy.Attack
+namespace TDS.Game.Enemy
 {
     public class EnemyRangeAttack : EnemyAttack
     {
@@ -24,7 +23,14 @@ namespace TDS.Game.Enemy.Attack
             TickTimer();
         }
 
-        public override void Attack()
+        protected override void OnActiveUpdate()
+        {
+            base.OnActiveUpdate();
+            
+            Attack();
+        }
+
+        private void Attack()
         {
             if (CanAttack())
             {

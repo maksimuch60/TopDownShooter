@@ -8,7 +8,7 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyFollow _enemyFollow;
         [SerializeField] private EnemyBackToIdle _enemyBackToIdle;
         [SerializeField] private TriggerObserver _triggerObserver;
-        
+
         private void Start()
         {
             _triggerObserver.OnTriggerEnter += OnEntered;
@@ -17,14 +17,14 @@ namespace TDS.Game.Enemy
 
         private void OnEntered(Collider2D col)
         {
-            _enemyFollow.enabled = true;
-            _enemyBackToIdle.enabled = false;
+            _enemyFollow.Activate();
+            _enemyBackToIdle.Deactivate();
         }
 
         private void OnExited(Collider2D obj)
         {
-            _enemyFollow.enabled = false;
-            _enemyBackToIdle.enabled = true;
+            _enemyFollow.Deactivate();
+            _enemyBackToIdle.Activate();
         }
     }
 }
