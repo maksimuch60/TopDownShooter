@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TDS.Game.Objects.Barrel
+namespace TDS.Game.Objects
 {
     public class BarrelAnimation : MonoBehaviour
     {

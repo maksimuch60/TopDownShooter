@@ -1,10 +1,8 @@
-﻿using System;
-using TDS.Constants;
+﻿using TDS.Constants;
 using TDS.Game.Interfaces;
-using TDS.Game.Player;
 using UnityEngine;
 
-namespace TDS.Game.Objects.Barrel
+namespace TDS.Game.Objects
 {
     public class Barrel : MonoBehaviour
     {

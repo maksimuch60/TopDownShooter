@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-namespace TDS.Game.Objects.Patrol
+namespace TDS.Game.Objects
 {
     [Serializable]
     public class PatrolPath : MonoBehaviour

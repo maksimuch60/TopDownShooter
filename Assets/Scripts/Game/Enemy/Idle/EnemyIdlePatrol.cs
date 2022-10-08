@@ -1,5 +1,5 @@
 ﻿using TDS.Game.Enemy.Movement;
-using TDS.Game.Objects.Patrol;
+using TDS.Game.Objects;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
@@ -11,27 +11,28 @@ namespace TDS.Game.Enemy
 
         private Vector3 _currentPosition;
 
-        private void Awake()
+        protected override void OnActiveUpdate()
         {
-            SetTarget(_patrolPath.NextPoint().transform);
-        }
-
-        private void OnEnable()
-        {
-            SetTarget(_patrolPath.NextPoint().transform);
-        }
-
-        private void OnDisable()
-        {
-            SetTarget(null);
-        }
-
-        private void Update()
-        {
+            base.OnUpdate();
+            
             if (Vector3.Distance(transform.position, _currentPosition) <= 0.1f)
             {
                 SetTarget(_patrolPath.NextPoint().transform);
             }
+        }
+
+        public override void Activate()
+        {
+            base.Activate();
+            
+            SetTarget(_patrolPath.NextPoint().transform);
+        }
+
+        public override void Deactivate()
+        {
+            base.Deactivate();
+            
+            SetTarget(null);
         }
 
         private void SetTarget(Transform patrolPoint)

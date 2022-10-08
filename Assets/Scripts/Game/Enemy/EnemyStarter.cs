@@ -9,7 +9,7 @@ namespace TDS.Game.Enemy
 
         private void Start()
         {
-            _enemyIdle.enabled = true;
+            _enemyIdle.Activate();
         }
     }
 }

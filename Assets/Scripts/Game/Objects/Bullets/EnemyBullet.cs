@@ -2,7 +2,7 @@
 using TDS.Game.Player;
 using UnityEngine;
 
-namespace TDS.Game.Objects.Bullets
+namespace TDS.Game.Objects
 {
     class EnemyBullet : BulletBase
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace TDS.Game.Objects.Bullets
+namespace TDS.Game.Objects
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class BulletBase : MonoBehaviour

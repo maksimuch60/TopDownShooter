@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using TDS.Game.Objects.Patrol;
+using TDS.Game.Objects;
 using UnityEditor;
 using UnityEngine;
 
 namespace TDS.Editor.Gizmos
 {
-    public class PatrolGizmoDrawer
+    [CustomEditor(typeof(PatrolEditor))]
+    public class PatrolEditor : UnityEditor.Editor
     {
         [DrawGizmo(GizmoType.Selected | GizmoType.NonSelected)]
         static void DrawPatrolGizmo(PatrolPath patrolPath, GizmoType gizmoType)

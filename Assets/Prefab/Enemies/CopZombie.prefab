@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 2609230141347937906}
   - component: {fileID: 2611308195684989195}
   - component: {fileID: 3393472269880707114}
+  - component: {fileID: 384078166758701925}
   m_Layer: 8
   m_Name: CopZombie
   m_TagString: Enemy
@@ -288,6 +289,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyIdle: {fileID: 222710354}
+--- !u!114 &384078166758701925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7238172961817913249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7cac7efb77449e6b5e95c030dca5d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDeath: {fileID: 7238172961817913275}
+  _spawnObjects:
+  - name: FirstAidKit
+    GameObject: {fileID: 6496683856803459383, guid: f75ea9184fff5374b88776d4c0319101, type: 3}
+    Chance: 1
 --- !u!1 &7238172962701914087
 GameObject:
   m_ObjectHideFlags: 0
