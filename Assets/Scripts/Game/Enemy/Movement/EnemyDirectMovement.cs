@@ -2,6 +2,7 @@
 
 namespace TDS.Game.Enemy.Movement
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class EnemyDirectMovement : EnemyMovement
     {
         [SerializeField] private float _speed;
@@ -45,6 +46,7 @@ namespace TDS.Game.Enemy.Movement
         private void SetVelocity(Vector2 velocity)
         {
             _rigidbody.velocity = velocity;
+            SetAnimationSpeed(velocity.magnitude);
         }
 
         private bool IsTargetValid()
@@ -55,7 +57,8 @@ namespace TDS.Game.Enemy.Movement
         private void MoveToTarget()
         {
             Vector3 direction = (_target.position - _cachedTransform.position).normalized;
-            SetVelocity(direction * _speed);
+            Vector3 velocity = direction * _speed;
+            SetVelocity(velocity);
         }
 
         private void RotateToTarget()

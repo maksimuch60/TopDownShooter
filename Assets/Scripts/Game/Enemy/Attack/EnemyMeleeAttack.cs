@@ -5,6 +5,8 @@ namespace TDS.Game.Enemy
 {
     public class EnemyMeleeAttack : EnemyAttack
     {
+        [SerializeField] private EnemyAnimation _enemyAnimation;
+
         [SerializeField] private float _attackDelay;
         [SerializeField] private Transform _attackPoint;
         [SerializeField] private float _radius;
@@ -13,9 +15,26 @@ namespace TDS.Game.Enemy
         
 
         private float _delayTimer;
-        
-        private void Update()
+
+        public void PerformDamage()
         {
+            Collider2D col = Physics2D.OverlapCircle(_attackPoint.position, _radius, _layerMask);
+
+            if (col == null)
+            {
+                return;
+            }
+
+            if (col.TryGetComponent(out PlayerHp playerHp))
+            {
+                playerHp.RemoveHp(_damage);
+            }
+        }
+
+        protected override void OnUpdate()
+        {
+            base.OnUpdate();
+            
             TickTimer();
         }
 
@@ -37,17 +56,7 @@ namespace TDS.Game.Enemy
         private void InternalAttack()
         {
             _delayTimer = _attackDelay;
-            Collider2D col = Physics2D.OverlapCircle(_attackPoint.position, _radius, _layerMask);
-
-            if (col == null)
-            {
-                return;
-            }
-
-            if (col.TryGetComponent(out PlayerHp playerHp))
-            {
-                playerHp.RemoveHp(_damage);
-            }
+            _enemyAnimation.PlayAttack();
         }
 
         private void TickTimer()

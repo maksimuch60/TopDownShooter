@@ -9,9 +9,6 @@ namespace TDS.Game.Enemy
         [SerializeField] private TriggerObserver _triggerObserver;
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private EnemyFollow _enemyFollow;
-        
-        
-        private bool _isInRange;
 
         private void Start()
         {

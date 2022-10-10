@@ -6,6 +6,7 @@ namespace TDS.Game.Enemy
     public class EnemyFollowAgro : MonoBehaviour
     {
         [SerializeField] private EnemyFollow _enemyFollow;
+        [SerializeField] private EnemyIdle _enemyIdle;
         [SerializeField] private EnemyBackToIdle _enemyBackToIdle;
         [SerializeField] private TriggerObserver _triggerObserver;
 
@@ -17,8 +18,16 @@ namespace TDS.Game.Enemy
 
         private void OnEntered(Collider2D col)
         {
+            if (_enemyIdle.IsActive)
+            {
+                _enemyIdle.Deactivate();
+            }
+            else
+            {
+                _enemyBackToIdle.Deactivate();
+            }
+
             _enemyFollow.Activate();
-            _enemyBackToIdle.Deactivate();
         }
 
         private void OnExited(Collider2D obj)

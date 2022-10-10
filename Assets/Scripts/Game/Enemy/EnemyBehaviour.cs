@@ -4,11 +4,13 @@ namespace TDS.Game.Enemy
 {
     public abstract class EnemyBehaviour : MonoBehaviour
     {
-        private bool _isActive;
+        public bool IsActive { get; private set; }
 
         private void Update()
         {
-            if (_isActive)
+            OnUpdate();
+            
+            if (IsActive)
             {
                 OnActiveUpdate();
             }
@@ -16,12 +18,12 @@ namespace TDS.Game.Enemy
 
         public virtual void Activate()
         {
-            _isActive = true;
+            IsActive = true;
         }
 
         public virtual void Deactivate()
         {
-            _isActive = false;
+            IsActive = false;
         }
 
         protected virtual void OnActiveUpdate(){}
