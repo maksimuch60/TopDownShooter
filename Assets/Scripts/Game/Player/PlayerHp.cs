@@ -10,18 +10,20 @@ namespace TDS.Game.Player
         [SerializeField] private int _maxHp;
 
         public int CurrentHp { get; private set; }
+        public int MaxHp { get; private set; }
 
         public event Action<int> OnHpChanged;
 
         private void Awake()
         {
             CurrentHp = _originalHp;
+            MaxHp = _maxHp;
             OnHpChanged?.Invoke(CurrentHp);
         }
 
         public void AddHp(int hp)
         {
-            CurrentHp = Mathf.Min(_maxHp, CurrentHp + hp);
+            CurrentHp = Mathf.Min(MaxHp, CurrentHp + hp);
             OnHpChanged?.Invoke(CurrentHp);
         }
 

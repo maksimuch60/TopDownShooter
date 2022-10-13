@@ -1,4 +1,5 @@
-﻿using TDS.Game.Enemy.Movement;
+﻿using System;
+using TDS.Game.Enemy.Movement;
 using UnityEngine;
 
 namespace TDS.Game.Enemy
@@ -10,14 +11,53 @@ namespace TDS.Game.Enemy
         [SerializeField] private EnemyBackToIdle _enemyBackToIdle;
         [SerializeField] private TriggerObserver _triggerObserver;
 
+        [Header("Obstacles")]
+        [SerializeField] private LayerMask _obstacleMask;
+
+        private Transform _cachedTransform;
+
+        private bool _isInAgro;
+
+        private void Awake()
+        {
+            _cachedTransform = transform;
+        }
+
         private void Start()
         {
-            _triggerObserver.OnTriggerEnter += OnEntered;
+            _triggerObserver.OnTriggerStay += OnStayed;
             _triggerObserver.OnTriggerExit += OnExited;
         }
 
-        private void OnEntered(Collider2D col)
+        private void OnStayed(Collider2D other)
         {
+            if (_isInAgro)
+            {
+                return;
+            }
+            
+            Vector3 currentPosition = _cachedTransform.position;
+            Vector3 direction = other.ClosestPoint(currentPosition) - (Vector2)currentPosition;
+            RaycastHit2D hit2D = Physics2D.Raycast(currentPosition, direction, direction.magnitude, _obstacleMask);
+
+            
+            if (hit2D.collider == null)
+            {
+                EnterFollow();
+            }
+        }
+
+        private void OnExited(Collider2D other)
+        {
+            _enemyFollow.Deactivate();
+            _enemyBackToIdle.Activate();
+            _isInAgro = false;
+        }
+
+        private void EnterFollow()
+        {
+            _isInAgro = true;
+            
             if (_enemyIdle.IsActive)
             {
                 _enemyIdle.Deactivate();
@@ -28,12 +68,6 @@ namespace TDS.Game.Enemy
             }
 
             _enemyFollow.Activate();
-        }
-
-        private void OnExited(Collider2D obj)
-        {
-            _enemyFollow.Deactivate();
-            _enemyBackToIdle.Activate();
         }
     }
 }

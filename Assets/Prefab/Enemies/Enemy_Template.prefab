@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c753726cc2f41eca45e01bcbe66c364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyMeleeAttack: {fileID: 0}
 --- !u!58 &5670523374530670138
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -225,6 +226,7 @@ GameObject:
   - component: {fileID: 1968790299324918714}
   - component: {fileID: 5094183468220725857}
   - component: {fileID: 2046365837023238567}
+  - component: {fileID: 9220861826885471483}
   m_Layer: 8
   m_Name: Enemy_Template
   m_TagString: Untagged
@@ -279,6 +281,9 @@ MonoBehaviour:
   _enemyIdle: {fileID: 0}
   _enemyBackToIdle: {fileID: 0}
   _triggerObserver: {fileID: 377843281048048970}
+  _obstacleMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!114 &1968790299324918714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +333,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &9220861826885471483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4708155360471785529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43b89e0adbd46beba195db415b2711d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpBar: {fileID: 0}
 --- !u!1 &8345246187882129552
 GameObject:
   m_ObjectHideFlags: 0

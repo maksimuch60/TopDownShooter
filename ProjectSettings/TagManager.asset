@@ -22,7 +22,7 @@ TagManager:
   - EnemyAgro
   - EnemyAttack
   - Barrel
-  - 
+  - Obstacles
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 1579542383
     locked: 0
