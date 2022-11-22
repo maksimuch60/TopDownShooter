@@ -13,9 +13,9 @@ namespace TDS.Infrastructure.StateMachine
         {
             _states = new Dictionary<Type, IState>()
             {
-                {typeof(BootstrapState), new BootstrapState()},
-                {typeof(MenuState), new MenuState()},
-                {typeof(GameState), new GameState()}
+                {typeof(BootstrapState), new BootstrapState(this)},
+                {typeof(MenuState), new MenuState(this)},
+                {typeof(GameState), new GameState(this)}
             };
         }
         

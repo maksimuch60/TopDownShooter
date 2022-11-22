@@ -1,15 +1,19 @@
 ﻿namespace TDS.Infrastructure.StateMachine
 {
-    public class MenuState : IState
+    public class MenuState : BaseState
     {
-        public void Enter()
+        public MenuState(IGameStateMachine stateMachine) : base(stateMachine)
         {
-            throw new System.NotImplementedException();
         }
 
-        public void Exit()
+        public override void Enter()
         {
-            throw new System.NotImplementedException();
+            
+        }
+
+        public override void Exit()
+        {
+            
         }
     }
 }

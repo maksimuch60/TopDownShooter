@@ -1,15 +1,33 @@
 ﻿namespace TDS.Infrastructure.StateMachine
 {
-    public class BootstrapState : IState
+    public class BootstrapState : BaseState
     {
-        public void Enter()
+        public BootstrapState(IGameStateMachine stateMachine) : base(stateMachine)
         {
-            throw new System.NotImplementedException();
+            
         }
 
-        public void Exit()
+        public override void Enter()
         {
-            throw new System.NotImplementedException();
+            RegisterAllGlobalServices();
+
+            ISceneLoadService sceneLoadService = Services.Container.Get<ISceneLoadService>();
+            sceneLoadService.Load("MenuScene", OnSceneLoaded);
+        }
+
+        public override void Exit()
+        {
+            
+        }
+
+        private void RegisterAllGlobalServices()
+        {
+            Services.Container.Register<ISceneLoadService>(new SyncSceneLoadService());
+        }
+
+        private void OnSceneLoaded()
+        {
+            StateMachine.Enter<MenuState>();
         }
     }
 }

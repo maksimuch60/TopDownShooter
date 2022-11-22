@@ -1,15 +1,25 @@
 ﻿namespace TDS.Infrastructure.StateMachine
 {
-    public class GameState : IState
+    public class GameState : BaseState
     {
-        public void Enter()
+        public GameState(IGameStateMachine stateMachine) : base(stateMachine)
         {
-            throw new System.NotImplementedException();
         }
 
-        public void Exit()
+        public override void Enter()
         {
-            throw new System.NotImplementedException();
+            ISceneLoadService sceneLoadService = Services.Container.Get<ISceneLoadService>();
+            sceneLoadService.Load("GameScene", OnGameSceneLoaded);
+        }
+
+        public override void Exit()
+        {
+            
+        }
+
+        private void OnGameSceneLoaded()
+        {
+            //TODO: register all local game state services
         }
     }
 }
