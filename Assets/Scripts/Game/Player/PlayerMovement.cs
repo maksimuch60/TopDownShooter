@@ -1,3 +1,4 @@
+using TDS.Game.InputService;
 using UnityEngine;
 
 namespace TDS.Game.Player
@@ -10,13 +11,18 @@ namespace TDS.Game.Player
         [SerializeField] private float _speed = 4f;
 
         private Rigidbody2D _rigidbody;
-        private Camera _cachedCamera;
         private Transform _cachedTransform;
+
+        private IInputService _inputService;
+
+        public void Construct(IInputService inputService)
+        {
+            _inputService = inputService;
+        }
 
         private void Awake()
         {
             _rigidbody = GetComponent<Rigidbody2D>();
-            _cachedCamera = Camera.main;
             _cachedTransform = transform;
         }
 
@@ -28,10 +34,7 @@ namespace TDS.Game.Player
 
         private void Move()
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-
-            Vector2 direction = new(horizontal, vertical);
+            Vector2 direction = _inputService.Axes;
             Vector3 moveDelta = direction * (_speed);
             _rigidbody.velocity = moveDelta;
 
@@ -40,11 +43,7 @@ namespace TDS.Game.Player
 
         private void Rotate()
         {
-            Vector3 mousePositionInPixels = Input.mousePosition;
-            Vector3 mousePositionInUnits = _cachedCamera.ScreenToWorldPoint(mousePositionInPixels);
-
-            Vector2 direction = mousePositionInUnits - _cachedTransform.position;
-            _cachedTransform.up = direction;
+            _cachedTransform.up = _inputService.LookDirection;
         }
     }
 }

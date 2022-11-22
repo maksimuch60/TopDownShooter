@@ -1,4 +1,8 @@
-﻿namespace TDS.Infrastructure.StateMachine
+﻿using TDS.Game.InputService;
+using TDS.Game.Player;
+using UnityEngine;
+
+namespace TDS.Infrastructure.StateMachine
 {
     public class GameState : BaseState
     {
@@ -14,12 +18,35 @@
 
         public override void Exit()
         {
-            
+            UnRegisterLocalServices();
+        }
+
+        private void UnRegisterLocalServices()
+        {
+            Services.Container.UnRegister<IInputService>();
         }
 
         private void OnGameSceneLoaded()
         {
-            //TODO: register all local game state services
+            RegisterLocalServices();
+        }
+
+        private void RegisterLocalServices()
+        {
+            PlayerMovement playerMovement = Object.FindObjectOfType<PlayerMovement>();
+            RegisterInputService(playerMovement);
+            InitPlayerMovement(playerMovement);
+        }
+
+        private void InitPlayerMovement(PlayerMovement playerMovement)
+        {
+            playerMovement.Construct(Services.Container.Get<IInputService>());
+        }
+
+        private void RegisterInputService(PlayerMovement playerMovement)
+        {
+            Services.Container.Register<IInputService>(
+                new StandaloneInputService(Camera.main, playerMovement.transform));
         }
     }
 }
