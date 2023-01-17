@@ -1,4 +1,7 @@
-﻿namespace TDS.Infrastructure.StateMachine
+﻿using TDS.Infrastructure.Coroutine;
+using UnityEngine;
+
+namespace TDS.Infrastructure.StateMachine
 {
     public class BootstrapState : BaseState
     {
@@ -15,6 +18,11 @@
             sceneLoadService.Load("MenuScene", OnSceneLoaded);
         }
 
+        private void OnSceneLoaded()
+        {
+            StateMachine.Enter<MenuState>();
+        }
+
         public override void Exit()
         {
             
@@ -22,12 +30,16 @@
 
         private void RegisterAllGlobalServices()
         {
-            Services.Container.Register<ISceneLoadService>(new SyncSceneLoadService());
+            CreateCoroutineRunner();
+            Services.Container.Register<ISceneLoadService>(
+                new SyncSceneLoadService(Services.Container.Get<ICoroutineRunner>()));
         }
 
-        private void OnSceneLoaded()
+        private void CreateCoroutineRunner()
         {
-            StateMachine.Enter<MenuState>();
+            CoroutineRunner coroutineRunner = new GameObject(nameof(CoroutineRunner)).AddComponent<CoroutineRunner>();
+            Object.DontDestroyOnLoad(coroutineRunner);
+            Services.Container.Register<ICoroutineRunner>(coroutineRunner);
         }
     }
 }

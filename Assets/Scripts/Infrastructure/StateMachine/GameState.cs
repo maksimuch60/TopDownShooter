@@ -1,6 +1,7 @@
 ﻿using TDS.Game.InputService;
 using TDS.Game.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TDS.Infrastructure.StateMachine
 {
